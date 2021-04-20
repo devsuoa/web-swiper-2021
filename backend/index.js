@@ -1,6 +1,7 @@
 import socket from "socket.io";
 import http from "http";
 import express from "express";
+
 const app = express();
 const port = 3000;
 
@@ -8,6 +9,16 @@ const server = http.createServer(app);
 const io = socket(server);
 
 const rooms = {};
+
+app.get('/:id', function (req, res) {
+  const {id} = req.params
+  res.send(rooms[id])
+})
+
+app.post('/:id', function (req, res) {
+  const {id} = req.params
+  res.send(rooms[id])
+})
 
 const createLobby = ({ id, question, options }) => {
   rooms[id] = { question, options };
