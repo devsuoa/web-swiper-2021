@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    position: absolute;
+    background-color: rgb(115, 163, 253);
+    width: 200px;
+    min-height: 300px;
+    padding: 100px;
+    font-size: 100px;
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
