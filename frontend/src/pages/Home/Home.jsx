@@ -1,12 +1,29 @@
-import { useState } from "react";
-import styles from "./Home.module.css";
-import { useHistory } from "react-router-dom";
+import { useState } from 'react'
+import styles from './Home.module.css'
+import { useHistory } from 'react-router-dom'
+import axios from 'axios'
 
 export default function Home() {
-    const [options, setOptions] = useState([]);
-    const [question, setQuestion] = useState("");
-    const [option, setOption] = useState("");
-    const history = useHistory();
+    const [options, setOptions] = useState([])
+    const [question, setQuestion] = useState('')
+    const [option, setOption] = useState('')
+    const history = useHistory()
+
+    const handleSubmit = async () => {
+        try {
+            const { data } = await axios.post(
+                process.env.REACT_APP_API + 'create',
+                {
+                    question,
+                    options,
+                },
+            )
+            console.log(data)
+            history.push('/stats/' + data)
+        } catch (err) {
+            alert(err)
+        }
+    }
 
     return (
         <div className={styles.container}>
@@ -33,8 +50,8 @@ export default function Home() {
                 <button
                     className={styles.button}
                     onClick={() => {
-                        setOptions([...options, option]);
-                        setOption("");
+                        setOptions([...options, option])
+                        setOption('')
                     }}
                 >
                     Add
@@ -46,7 +63,7 @@ export default function Home() {
                             key={o}
                             onClick={() =>
                                 setOptions(
-                                    options.filter((option) => o !== option)
+                                    options.filter((option) => o !== option),
                                 )
                             }
                         >
@@ -55,13 +72,10 @@ export default function Home() {
                     ))}
                 </ul>
 
-                <button
-                    className={styles.createButton}
-                    onClick={() => history.push("/stats")}
-                >
+                <button className={styles.createButton} onClick={handleSubmit}>
                     Create Poll
                 </button>
             </div>
         </div>
-    );
+    )
 }
