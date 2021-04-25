@@ -37,8 +37,9 @@ export default function Stats() {
             <h1>{data?.question}</h1>
             <ul>
                 {data?.results.map((o) => (
-                    <li key={o.name}>
-                        {o.name}: {o.votes} votes
+                    <li className={styles.listItem} key={o.name}>
+                        {o.name}:{' '}
+                        <span className={styles.votes}>{o.votes} votes </span>
                     </li>
                 ))}
             </ul>

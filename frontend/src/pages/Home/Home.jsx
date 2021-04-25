@@ -27,7 +27,7 @@ export default function Home() {
 
     return (
         <div className={styles.container}>
-            <h1> Swipe Poll </h1>
+            <h1 className={styles.heading}> Swipe Poll </h1>
             <div>
                 <input
                     className={styles.questionInput}
@@ -48,7 +48,7 @@ export default function Home() {
                 />
 
                 <button
-                    className={styles.button}
+                    className={styles.addButton}
                     onClick={() => {
                         setOptions([...options, option])
                         setOption('')
@@ -60,6 +60,7 @@ export default function Home() {
                 <ul>
                     {options.map((o) => (
                         <li
+                            className={styles.listItem}
                             key={o}
                             onClick={() =>
                                 setOptions(

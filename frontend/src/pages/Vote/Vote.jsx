@@ -31,8 +31,8 @@ export default function Vote() {
 
     return (
         <div className={styles.container}>
-            <h1>Swipe Left for no or right for</h1>
-            <h2>{data?.question}</h2>
+            <h2>Swipe Left for no or Right for yes</h2>
+            <h1>{data?.question}</h1>
             <div className={styles.cardContainer}>
                 {data?.options.map((o) => (
                     <TinderCard
@@ -41,6 +41,7 @@ export default function Vote() {
                         onCardLeftScreen={(direction) =>
                             handleSwipe(direction, o)
                         }
+                        preventSwipe={['up', 'down']}
                     >
                         {o}
                     </TinderCard>
