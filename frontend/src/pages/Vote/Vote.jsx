@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import TinderCard from 'react-tinder-card'
-import styles from './Vote.module.css'
+import './Vote.css'
 export default function Vote() {
     const { code } = useParams()
     const [data, setData] = useState()
@@ -30,14 +30,14 @@ export default function Vote() {
     }
 
     return (
-        <div className={styles.container}>
+        <div className="voteContainer">
             <h2>Swipe Left for no or Right for yes</h2>
             <h1>{data?.question}</h1>
-            <div className={styles.cardContainer}>
+            <div className="cardContainer">
                 {data?.options.map((o) => (
                     <TinderCard
                         key={o}
-                        className={styles.card}
+                        className="card"
                         onCardLeftScreen={(direction) =>
                             handleSwipe(direction, o)
                         }
