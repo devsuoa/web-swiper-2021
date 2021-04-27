@@ -33,7 +33,7 @@ app.post('/create', (req, res) => {
             }
         }),
     }
-    res.send(random)
+    res.send(code)
 })
 
 app.get('/:code', (req, res) => {

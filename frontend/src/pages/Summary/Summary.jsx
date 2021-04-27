@@ -14,7 +14,7 @@ export default function Stats() {
             .get('http://localhost:3001/' + code)
             .then((res) => {
                 setData(res.data)
-                const socket = io(process.env.REACT_APP_API, {
+                const socket = io('http://localhost:3001/', {
                     query: {
                         code: code,
                     },
