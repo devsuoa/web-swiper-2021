@@ -10,20 +10,18 @@ export default function Home() {
     const [option, setOption] = useState('')
     const history = useHistory()
 
-    const handleSubmit = async () => {
-        try {
-            const { data } = await axios.post(
-                process.env.REACT_APP_API + 'create',
-                {
-                    question,
-                    options,
-                },
-            )
-            console.log(data)
-            history.push('/stats/' + data)
-        } catch (err) {
+    const handleSubmit = () => {
+        axios.post(
+            'http://localhost:3001/create',
+            {
+                question,
+                options,
+            },
+        ).then(res => {
+            history.push('/stats/' + res.data)
+        }).catch(err => {
             alert(err)
-        }
+        })
     }
 
     return (

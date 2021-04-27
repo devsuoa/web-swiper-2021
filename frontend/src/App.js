@@ -1,5 +1,3 @@
-import './App.css'
-
 import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 import Home from './pages/Home/Home'
 import Summary from './pages/Summary/Summary'

@@ -10,7 +10,7 @@ export default function Vote() {
 
     useEffect(() => {
         axios
-            .get(process.env.REACT_APP_API + code)
+            .get('http://localhost:3001/' + code)
             .then((res) => {
                 setData(res.data)
             })
@@ -18,12 +18,11 @@ export default function Vote() {
                 alert(err)
                 history.push('/')
             })
-    }, [])
+    }, [code, history])
 
     const handleSwipe = (direction, card) => {
-        console.log(direction)
         if (direction === 'right') {
-            axios.post(process.env.REACT_APP_API + code, {
+            axios.post('http://localhost:3001/' + code, {
                 option: card,
             })
         }
