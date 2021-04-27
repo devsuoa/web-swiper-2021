@@ -11,7 +11,7 @@ export default function Stats() {
 
     useEffect(() => {
         axios
-            .get(process.env.REACT_APP_API + code)
+            .get('http://localhost:3001/' + code)
             .then((res) => {
                 setData(res.data)
                 const socket = io(process.env.REACT_APP_API, {
@@ -29,7 +29,7 @@ export default function Stats() {
                 alert(err)
                 history.push('/')
             })
-    }, [])
+    }, [code, history])
 
     return (
         <div className="summaryContainer">
