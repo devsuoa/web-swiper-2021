@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import axios from 'axios'
-import styles from './Summary.module.css'
+import './Summary.css'
 import { io } from 'socket.io-client'
 
 export default function Stats() {
@@ -32,14 +32,14 @@ export default function Stats() {
     }, [])
 
     return (
-        <div className={styles.container}>
+        <div className="summaryContainer">
             <h1>Code: {code}</h1>
             <h1>{data?.question}</h1>
             <ul>
                 {data?.results.map((o) => (
-                    <li className={styles.listItem} key={o.name}>
+                    <li className="listItem" key={o.name}>
                         {o.name}:{' '}
-                        <span className={styles.votes}>{o.votes} votes </span>
+                        <span className="votes">{o.votes} votes </span>
                     </li>
                 ))}
             </ul>

@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import styles from './Home.module.css'
+import Input from '../../components/Input'
+import './Home.css'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 
@@ -26,29 +27,27 @@ export default function Home() {
     }
 
     return (
-        <div className={styles.container}>
-            <h1 className={styles.heading}> Swipe Poll </h1>
+        <div className="homeContainer">
+            <h1 className="heading"> Swipe Poll </h1>
             <div>
-                <input
-                    className={styles.questionInput}
+                <Input
+                    className="questionInput"
                     type="text"
-                    name="question"
                     placeholder="Type a question..."
                     value={question}
-                    onChange={(e) => setQuestion(e.target.value)}
+                    setValue={setQuestion}
                 />
 
-                <input
-                    className={styles.optionInput}
+                <Input
+                    className="optionInput"
                     type="text"
-                    name="add-option"
                     placeholder="Add an option..."
                     value={option}
-                    onChange={(e) => setOption(e.target.value)}
+                    setValue={setOption}
                 />
 
                 <button
-                    className={styles.addButton}
+                    className="addButton"
                     onClick={() => {
                         setOptions([...options, option])
                         setOption('')
@@ -60,7 +59,7 @@ export default function Home() {
                 <ul>
                     {options.map((o) => (
                         <li
-                            className={styles.listItem}
+                            className="listItem"
                             key={o}
                             onClick={() =>
                                 setOptions(
@@ -73,7 +72,7 @@ export default function Home() {
                     ))}
                 </ul>
 
-                <button className={styles.createButton} onClick={handleSubmit}>
+                <button className="createButton" onClick={handleSubmit}>
                     Create Poll
                 </button>
             </div>
