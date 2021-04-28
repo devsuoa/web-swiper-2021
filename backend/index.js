@@ -18,12 +18,13 @@ const randomCode = () => {
     return Math.random().toString(36).substring(7)
 }
 
-const rooms = {}
+const lobbies = {}
 
 app.post('/create', (req, res) => {
     const { question, options } = req.body
     const code = randomCode()
-    rooms[code] = {
+
+    lobbies[code] = {
         question,
         options,
         results: options.map((item) => {
@@ -33,29 +34,36 @@ app.post('/create', (req, res) => {
             }
         }),
     }
+    
     res.send(code)
 })
 
 app.get('/:code', (req, res) => {
     const { code } = req.params
-    console.log(rooms[code])
-    if (rooms[code] === undefined) {
+
+    if (lobbies[code] === undefined) {
         res.sendStatus(404)
         return
     }
-    res.send(rooms[code])
+
+    res.send(lobbies[code])
 })
 
 app.post('/:code', (req, res) => {
     const { code } = req.params
     const { option } = req.body
-    rooms[code].results = rooms[code].results.map((item) => {
+
+    if (lobbies[code] === undefined) {
+        res.sendStatus(404)
+        return
+    }
+
+    lobbies[code].results.map((item) => {
         if (item.name === option) {
             item.votes++
         }
-        return item
     })
-    io.to(code).emit('data', rooms[code])
+    io.to(code).emit('data', lobbies[code])
 })
 
 io.on('connection', (socket) => {
