@@ -9,21 +9,22 @@ export default function Stats() {
     const [data, setData] = useState()
     const history = useHistory()
 
+    const socket = io('http://localhost:3001/', {
+        query: {
+            code: code,
+        },
+    })
+
+    socket.on('data', (data) => {
+        console.log(data)
+        setData(data)
+    })
+
     useEffect(() => {
         axios
             .get('http://localhost:3001/' + code)
             .then((res) => {
                 setData(res.data)
-                const socket = io('http://localhost:3001/', {
-                    query: {
-                        code: code,
-                    },
-                })
-
-                socket.on('data', (data) => {
-                    console.log(data)
-                    setData(data)
-                })
             })
             .catch((err) => {
                 alert(err)
